@@ -1,0 +1,48 @@
+// Стили для хедера
+.header {
+  flex-shrink: 0;
+
+  &__top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:20px;
+    width: 100%;
+    margin-bottom: 40px;
+
+    & h1 {
+      font-weight: 800;
+    }
+  }
+
+  &__menu {
+
+    &--list {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    &--link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      transition: all 0.3s ease;
+      height: 40px;
+
+      &:hover {
+        color: var(--color-white);
+      }
+
+      &:hover svg .home {
+        opacity: 1;
+      }
+
+      &:hover svg .favorites {
+        opacity: 1;
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.popular {
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    color: var(--color-accent-white);
+
+    &--see-more {
+      cursor: pointer;
+      height: 35px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: var(--color-white);
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}

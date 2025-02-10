@@ -1,0 +1,38 @@
+body {
+  font-family: var(--font-family-base);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-white-primary);
+  background-color: var(--color-dark-primary);
+}
+
+img {
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+a,
+input,
+textarea,
+svg * {
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  font-size: 32px;
+  margin: 0;
+}

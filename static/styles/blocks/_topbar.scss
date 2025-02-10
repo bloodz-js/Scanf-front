@@ -1,0 +1,56 @@
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 24px;
+
+  &__history--buttons {
+    display: flex;
+    flex-shrink: 0;
+    gap: 24px;
+  }
+
+  &__search {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+
+    & input {
+      height: 56px;
+      padding: 18px 24px;
+      border: 2px solid rgba(255, 255, 255, 0.03);
+      border-radius: var(--border-radius);
+      color: var(--color-white-primary);
+      outline: none;
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    & button {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 56px;
+      width: 56px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+
+      & svg {
+        width: 25px;
+        height: 26px;
+      }
+    }
+  }
+
+  &__sign-up {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}

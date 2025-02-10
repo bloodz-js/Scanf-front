@@ -1,0 +1,611 @@
+@charset "UTF-8";
+/**
+  Нормализация блочной модели
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/**
+  Убираем внутренние отступы слева тегам списков,
+  у которых есть атрибут class
+ */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+  Убираем внешние отступы вертикали нужным тегам,
+  у которых есть атрибут class
+ */
+:where(h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+ */
+:where(ul[class]) {
+  list-style: none;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+ */
+p {
+  --paragraphMarginBottom: 24px;
+  margin-block: 0;
+}
+
+/**
+  Внешний отступ вниз для параграфа без атрибута class,
+  который расположен не последним среди своих соседних элементов
+ */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+  Упрощаем работу с изображениями
+ */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  height: 100%;
+  /**
+    Плавный скролл
+   */
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  min-height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+  line-height: 1.5;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+ */
+/* svg *[fill] { fill: currentColor }
+svg *[stroke] { stroke: currentColor } */
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@font-face {
+  font-family: "Lato";
+  src: url("../fonts/Lato-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("../fonts/Lato-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("../fonts/Lato-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("../fonts/Lato-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --color-dark-primary: #1E1E1E;
+  --color-accent-white: #6F6F6F;
+  --color-red: #AD0000;
+  --color-purple: #462F56;
+  --color-white: #FFFFFF;
+  --color-white-primary: rgba(255, 255, 255, 0.8);
+  --color-player: rgba(15, 15, 15, 0.7);
+  --color-tile: #0F0F0F;
+  --color-tile-alt: rgba(0, 0, 0, 0.35);
+  --padding-vertical: 12px 0;
+  --border-radius: 20px;
+  --border-radius-card-img: 5px;
+  --font-family-base: "Lato", "sans-serif";
+  --transition-duration: 0.3;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 98%;
+  height: 100vh;
+  margin-inline: auto;
+  padding: var(--padding-vertical);
+  gap: 12px;
+}
+.container__top {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  gap: 12px;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.artist {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+body {
+  font-family: var(--font-family-base);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-white-primary);
+  background-color: var(--color-dark-primary);
+}
+
+img {
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+a,
+input,
+textarea,
+svg * {
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  font-size: 32px;
+  margin: 0;
+}
+
+.header {
+  flex-shrink: 0;
+}
+.header__top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+.header__top h1 {
+  font-weight: 800;
+}
+.header__menu--list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.header__menu--link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  height: 40px;
+}
+.header__menu--link:hover {
+  color: var(--color-white);
+}
+.header__menu--link:hover svg .home {
+  opacity: 1;
+}
+.header__menu--link:hover svg .favorites {
+  opacity: 1;
+}
+
+.tile {
+  background-color: var(--color-tile-alt);
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 1;
+  padding: 4px;
+  height: auto;
+  min-height: 100px;
+}
+.tile__content {
+  background-color: var(--color-tile);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+.tile__content--mg {
+  margin: 8px 0;
+}
+.tile--header {
+  min-width: 18vw;
+  min-height: 80vh;
+}
+.tile--header .tile__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.tile--header .tile__content--header {
+  min-width: 18vw;
+  min-height: 80vh;
+}
+.tile--music {
+  flex: 1;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tile--music-player {
+  padding: 15px 30px;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--color-white-primary);
+}
+.button--red {
+  color: var(--color-red);
+}
+.button--red:hover {
+  transform: scale(0.97);
+}
+.button--history {
+  display: flex;
+  gap: 24px;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+}
+.button--sign-up:hover {
+  color: var(--color-white);
+}
+
+.background {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+.background__image {
+  position: absolute;
+  z-index: 0;
+}
+.background__image--1 {
+  /* Стили для первого изображения */
+}
+.background__image--2 {
+  position: absolute;
+  bottom: -150px;
+  right: 0;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 24px;
+}
+.topbar__history--buttons {
+  display: flex;
+  flex-shrink: 0;
+  gap: 24px;
+}
+.topbar__search {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+}
+.topbar__search input {
+  height: 56px;
+  padding: 18px 24px;
+  border: 2px solid rgba(255, 255, 255, 0.03);
+  border-radius: var(--border-radius);
+  color: var(--color-white-primary);
+  outline: none;
+  background: rgba(0, 0, 0, 0.25);
+}
+.topbar__search button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 56px;
+  width: 56px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.topbar__search button svg {
+  width: 25px;
+  height: 26px;
+}
+.topbar__sign-up {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.main__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.popular__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: var(--color-accent-white);
+}
+.popular__top--see-more {
+  cursor: pointer;
+  height: 35px;
+  transition: all 0.3s ease;
+}
+.popular__top--see-more:hover {
+  color: var(--color-white);
+}
+.popular__list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.popular--card {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  transition: all 0.3s ease;
+}
+.popular--card__left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 250px;
+}
+.popular--card__img--container {
+  position: relative;
+  transition: all 0.3s ease;
+}
+.popular--card__preview {
+  border-radius: var(--border-radius-card-img);
+  height: 60px;
+  width: 60px;
+}
+.popular--card__preview--start, .popular--card__preview--pause {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.popular--card:hover .popular--card__preview--start {
+  opacity: 1;
+}
+.popular--card__right {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 14px;
+  font-weight: 400;
+  padding-right: 80px;
+}
+.popular--card__right svg {
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.popular--card__right svg path {
+  transition: fill 0.3s ease;
+  fill: rgba(255, 255, 255, 0.8);
+}
+.popular--card__right svg:hover path {
+  fill: white;
+}
+.popular--card:hover .popular--card__preview {
+  opacity: 0.6;
+}
+.popular--card:hover .popular--card__start {
+  opacity: 1;
+}
+.popular--card:hover .popular--card__favorite, .popular--card:hover .popular--card__more {
+  opacity: 1;
+}
+.popular--card:hover {
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+.music-player {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  transition: all 0.3s ease;
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  gap: 100px;
+}
+.music-player__left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 250px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.music-player__preview {
+  border-radius: var(--border-radius-card-img);
+  height: 60px;
+  width: 60px;
+}
+.music-player__control-panel {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.music-player__control-panel--progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.music-player__control-panel--buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+.music-player__progress-bar {
+  height: 4px;
+  flex-grow: 1;
+  background-color: var(--color-white);
+  border-radius: 2px;
+  font-weight: 600;
+}
+.music-player__progress-bar p {
+  font-weight: 600;
+}
+.music-player__duration {
+  color: rgba(255, 255, 255, 0.5);
+}
+.music-player__right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.music-player__volume {
+  height: 4px;
+  width: 100px;
+  background-color: var(--color-white);
+  border-radius: 2px;
+}
+.music-player .start-btn {
+  display: none;
+  width: 50px;
+  height: 52px;
+}
+.music-player .pause-btn {
+  width: 50px;
+  height: 52px;
+}
+.music-player button:hover svg path {
+  fill: var(--color-white);
+  transform: scale(1.03);
+}
+.music-player button:hover .pause-svg,
+.music-player button:hover .start-svg {
+  opacity: 0.6;
+  transform: scale(0.97);
+}
+
+/*# sourceMappingURL=styles.css.map */

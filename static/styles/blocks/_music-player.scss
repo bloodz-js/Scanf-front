@@ -1,0 +1,95 @@
+.music-player {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  transition: all 0.3s ease;
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  gap: 100px;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 250px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  &__preview {
+    border-radius: var(--border-radius-card-img);
+    height: 60px;
+    width: 60px;
+  }
+
+  &__control-panel {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    &--progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    &--buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+  }
+
+  &__progress-bar {
+    height: 4px;
+    flex-grow: 1;
+    background-color: var(--color-white);
+    border-radius: 2px;
+    font-weight: 600;
+
+    & p {
+      font-weight: 600;
+    }
+  }
+
+  &__duration {
+    color: rgba(255, 255, 255, 0.5)
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__volume {
+    height: 4px;
+    width: 100px;
+    background-color: var(--color-white);
+    border-radius: 2px;
+  }
+
+  .start-btn {
+    display: none;
+    width: 50px;
+    height: 52px;
+  }
+
+  .pause-btn {
+    width: 50px;
+    height: 52px;
+  }
+
+  button:hover svg path {
+    fill: var(--color-white);
+    transform: scale(1.03);
+  }
+
+  button:hover .pause-svg,
+  button:hover .start-svg {
+    opacity: 0.6;
+    transform: scale(0.97);
+  }
+}

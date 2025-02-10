@@ -1,0 +1,28 @@
+.button {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--color-white-primary);
+
+  &--red {
+    color: var(--color-red);
+
+    &:hover {
+      transform: scale(0.97);
+    }
+  }
+
+  &--history {
+    display: flex;
+    gap: 24px;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+  }
+
+  &--sign-up:hover {
+    color: var(--color-white);
+  }
+}
