@@ -1,5 +1,6 @@
 body {
-  position: fixed;
+  overflow: hidden; /* Запрещает прокрутку всей страницы */
+  height: 100vh;
   font-family: var(--font-family-base);
   font-weight: 700;
   font-size: 16px;
