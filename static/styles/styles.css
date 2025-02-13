@@ -318,7 +318,7 @@ h1 {
 }
 .tile--header {
   min-width: 18vw;
-  min-height: 100%;
+  min-height: 80vh;
 }
 .tile--header .tile__content {
   display: flex;
@@ -328,7 +328,7 @@ h1 {
 }
 .tile--header .tile__content--header {
   min-width: 18vw;
-  min-height: 100%;
+  min-height: 80vh;
 }
 .tile--music {
   flex: 1;
@@ -463,14 +463,14 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  overflow: hidden;
+  overflow: scroll;
 }
 .popular__list::-webkit-scrollbar {
   width: 6px;
 }
 .popular__list::-webkit-scrollbar-thumb {
   background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 .popular--card {
